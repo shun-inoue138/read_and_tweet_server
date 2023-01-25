@@ -1,0 +1,45 @@
+const mongoose = require("mongoose");
+
+const TaskSchema = new mongoose.Schema({
+  url: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  randomNote: {
+    type: String,
+  },
+  categories: {
+    type: Array,
+  },
+  postContent: {
+    type: String,
+    maxLengh: 140,
+  },
+  understandingRate: {
+    type: Number,
+    min: 1,
+    max: 5,
+  },
+  dueDate: {
+    type: Date,
+    required: true,
+  },
+  isCompleted: {
+    type: Boolean,
+    default: false,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+module.exports = mongoose.model("Task", TaskSchema);
