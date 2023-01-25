@@ -1,7 +1,5 @@
 const express = require("express");
-
 const app = express();
-
 const port = 3003;
 const mongoose = require("mongoose");
 
@@ -17,10 +15,10 @@ try {
   console.log(error);
 }
 
-app.get("/api", (req, res) => {
-  res.send("Hello World!");
-});
+//ルーティング
+app.use("/api/v1/tasks", require("./src/v1/routes/tasks"));
 
+//サーバー起動
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
