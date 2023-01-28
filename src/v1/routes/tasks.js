@@ -6,6 +6,7 @@ const {
   getAllTasks,
   getTask,
   editTask,
+  deleteTask,
 } = require("../controllers/tasks");
 const { tasksValidator } = require("../handlers/validation");
 const app = express();
@@ -52,5 +53,8 @@ router.put(
   tasksValidator,
   editTask
 );
+
+//タスク削除
+router.delete("/:id", deleteTask);
 
 module.exports = router;

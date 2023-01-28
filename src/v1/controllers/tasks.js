@@ -51,4 +51,18 @@ const editTask = async (req, res) => {
     res.status(500).json(error);
   }
 };
-module.exports = { registerTask, getAllTasks, getTask, editTask };
+
+//タスク削除
+const deleteTask = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) {
+      res.status(404).json("タスクが見つかりません");
+    }
+    await task.deleteOne();
+    return res.status(200).json(task);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+module.exports = { registerTask, getAllTasks, getTask, editTask, deleteTask };
