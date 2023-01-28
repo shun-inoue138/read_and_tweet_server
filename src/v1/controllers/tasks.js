@@ -24,6 +24,7 @@ const getAllTasks = async (req, res) => {
 //タスク取得
 const getTask = async (req, res) => {
   try {
+    console.log(req.body);
     const task = await Task.findById(req.params.id);
     if (!task) {
       return res.status(404).json("タスクが見つかりません");
@@ -33,4 +34,21 @@ const getTask = async (req, res) => {
     res.status(500).json(error);
   }
 };
-module.exports = { registerTask, getAllTasks, getTask };
+
+//タスク編集
+const editTask = async (req, res) => {
+  try {
+    console.log(`${req.params.id}のタスクを編集します`);
+    //todo:重複箇所をまとめる
+    const task = await Task.findById(req.params.id);
+    if (!task) {
+      res.status(404).json("タスクが見つかりません");
+    }
+    await task.updateOne({ $set: req.body });
+    console.log("編集完了");
+    return res.status(200).json(task);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+module.exports = { registerTask, getAllTasks, getTask, editTask };
