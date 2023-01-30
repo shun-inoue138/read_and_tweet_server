@@ -7,6 +7,8 @@ const {
   getTask,
   editTask,
   deleteTask,
+  completeTask,
+  undoCompletedTask,
 } = require("../controllers/tasks");
 const { tasksValidator } = require("../handlers/validation");
 const app = express();
@@ -53,6 +55,12 @@ router.put(
   tasksValidator,
   editTask
 );
+
+//タスク完了
+router.put("/:id/complete", completeTask);
+
+//タスクを未完了に戻す
+router.put("/:id/undo", undoCompletedTask);
 
 //タスク削除
 router.delete("/:id", deleteTask);

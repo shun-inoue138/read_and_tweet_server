@@ -52,6 +52,45 @@ const editTask = async (req, res) => {
   }
 };
 
+//タスク完了
+const completeTask = async (req, res) => {
+  console.log(req.body);
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) {
+      res.status(404).json("タスクが見つかりません");
+    }
+    if (task.isCompleted) {
+      return res.status(500).json("完了済みです");
+    }
+
+    await task.updateOne({ $set: req.body });
+
+    return res.status(200).json(task);
+  } catch {
+    res.status(500).json(error);
+  }
+};
+
+//タスクを未完了に戻す
+const undoCompletedTask = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) {
+      res.status(404).json("タスクが見つかりません");
+    }
+    if (!task.isCompleted) {
+      return res.status(500).json("タスクは未完了です");
+    }
+
+    await task.updateOne({ $set: req.body });
+
+    return res.status(200).json(task);
+  } catch {
+    res.status(500).json(error);
+  }
+};
+
 //タスク削除
 const deleteTask = async (req, res) => {
   try {
@@ -65,4 +104,12 @@ const deleteTask = async (req, res) => {
     res.status(500).json(error);
   }
 };
-module.exports = { registerTask, getAllTasks, getTask, editTask, deleteTask };
+module.exports = {
+  registerTask,
+  getAllTasks,
+  getTask,
+  editTask,
+  deleteTask,
+  completeTask,
+  undoCompletedTask,
+};
