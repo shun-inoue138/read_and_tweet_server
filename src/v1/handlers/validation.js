@@ -17,4 +17,7 @@ const categoriesValidator = (req, res, next) => {
   commonProcess(req, res, next);
 };
 
-module.exports = { tasksValidator, categoriesValidator };
+const authValidator = (req, res, next) => {
+  commonProcess(req, res, next);
+};
+module.exports = { tasksValidator, categoriesValidator, authValidator };

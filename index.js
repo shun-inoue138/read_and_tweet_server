@@ -24,7 +24,7 @@ try {
 //ルーティング
 app.use("/api/v1/tasks", require("./src/v1/routes/tasks"));
 app.use("/api/v1/categories", require("./src/v1/routes/categories"));
-
+app.use("/api/v1/auth", require("./src/v1/routes/auth"));
 //サーバー起動
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
