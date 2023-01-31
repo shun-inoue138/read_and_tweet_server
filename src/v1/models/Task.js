@@ -32,14 +32,8 @@ const TaskSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
+
+TaskSchema.set("timestamps", true);
 
 module.exports = mongoose.model("Task", TaskSchema);

@@ -9,5 +9,6 @@ const CategorySchema = new mongoose.Schema({
     max: 20,
   },
 });
+CategorySchema.set("timestamps", true);
 
 module.exports = mongoose.model("Category", CategorySchema);
