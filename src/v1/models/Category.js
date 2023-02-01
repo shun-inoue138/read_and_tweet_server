@@ -8,7 +8,7 @@ const CategorySchema = new mongoose.Schema({
     min: 1,
     max: 20,
   },
-  user: {
+  user_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
