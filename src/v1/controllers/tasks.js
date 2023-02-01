@@ -14,7 +14,7 @@ const registerTask = async (req, res) => {
 //タスク一覧取得
 const getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({});
+    const tasks = await Task.find().where("user_id").equals(req.query.user_id);
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json(error);
@@ -38,7 +38,6 @@ const getTask = async (req, res) => {
 //タスク編集
 const editTask = async (req, res) => {
   try {
-    console.log(`${req.params.id}のタスクを編集します`);
     //todo:重複箇所をまとめる
     const task = await Task.findById(req.params.id);
     if (!task) {

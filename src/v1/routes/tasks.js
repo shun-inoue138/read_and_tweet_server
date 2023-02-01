@@ -29,6 +29,7 @@ router.post(
   body("randomNote")
     .isLength({ max: 140 })
     .withMessage("140文字以内で入力してください"),
+  body("user_id"),
   tasksValidator,
   registerTask
 );
