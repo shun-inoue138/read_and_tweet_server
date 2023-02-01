@@ -11,7 +11,7 @@ const comparePassword = (password, hash) => {
   return bcrypt.compareSync(password, hash);
 };
 
-const duplicateChecker = async (value, type) => {
+const duplicateUserChecker = async (value, type) => {
   console.log(value);
   const user = await User.findOne({ [type]: value });
   if (user) {
@@ -22,5 +22,5 @@ const duplicateChecker = async (value, type) => {
 module.exports = {
   hashPassword,
   comparePassword,
-  duplicateChecker,
+  duplicateUserChecker,
 };

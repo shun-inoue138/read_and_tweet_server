@@ -7,7 +7,7 @@ app.use(express.json());
 require("dotenv").config();
 
 const { body, check } = require("express-validator");
-const { duplicateChecker } = require("../utils/function");
+const { duplicateUserChecker } = require("../utils/function");
 const { authValidator } = require("../handlers/validation.js");
 const { signUp, signIn } = require("../controllers/auth.js");
 
@@ -27,10 +27,10 @@ router.post(
     .isLength({ min: 4 })
     .withMessage("パスワードを4文字以上で入力してください"),
   check("email").custom(async (value) => {
-    await duplicateChecker(value, "email");
+    await duplicateUserChecker(value, "email");
   }),
   check("username").custom(async (value) => {
-    await duplicateChecker(value, "username");
+    await duplicateUserChecker(value, "username");
   }),
   authValidator,
   signUp
